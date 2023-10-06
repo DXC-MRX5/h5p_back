@@ -1,3 +1,4 @@
+let dataArray = [];
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -14,9 +15,17 @@ app.get('/home', (req, res)=>{
     res.json({message:"this is the homepage..."})
 })
 
-app.post('/xapiData/statements', (req, res)=>{
-    console.log("data coming ==>>", req.body.object.definition.description);
-    res.json({message:"your data is saved..."})
+app.get('/xapiAllData', (req, res)=>{
+  res.json(dataArray);
+})
+
+let count = 0;
+
+app.post('/xapiData', (req, res)=>{
+    // dataArray.push(req.body);
+    res.send({message:"your data is saved..."})
+    count++
+    console.log("total object Received", count);
 })
 
 app.listen(port, async () => {
